@@ -1,4 +1,4 @@
-import { Navbar, Footer, Routes } from "./components";
+import { Navbar, Footer, Routes, Search } from "./components";
 import { useState } from "react";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -8,6 +8,7 @@ function App() {
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes />
         <Footer />
+        <Search />
       </div>
     </div>
   );

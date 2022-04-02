@@ -1,7 +1,14 @@
+import { Navbar, Footer, Routes } from "./components";
+import { useState } from "react";
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline"> hi</h1>
+    <div className={darkMode ? "dark" : ""}>
+      <div className="dark:bg-gray-900 bg-gray-100 dark:text-gray-200 black min-h-screen">
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Routes />
+        <Footer />
+      </div>
     </div>
   );
 }

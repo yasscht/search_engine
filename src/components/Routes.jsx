@@ -1,11 +1,12 @@
 import { Switch, Redirect, Route } from "react-router-dom";
+import Result from "./Result";
 const Routes = () => (
   <div className="p-4">
     <Switch>
-      <Route exacte to="/">
+      <Route exact path="/">
         <Redirect to="/search" />
       </Route>
-      <Route to={["/search", "/images", "/news", "/videos"]}>
+      <Route exact path={["/", "/search", "/images", "/news", "/videos"]}>
         <Result />
       </Route>
     </Switch>

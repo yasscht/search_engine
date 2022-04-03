@@ -8,7 +8,6 @@ function App() {
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes />
         <Footer />
-        <Search />
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const Result = () => {
     case "/search":
       return (
         <div className="sm:px-56 flex flex-wrap justify-between space-y-6">
-          {results?.results?.map(({ link, title, description }, index) => (
+          {results?.map(({ link, title, description }, index) => (
             <div key={index} className="md:w-2/5 w-full">
               <a href={link} target="_blank" rel="noreferrer">
                 <p className="text-sm">
@@ -46,7 +46,7 @@ const Result = () => {
     case "/news":
       return (
         <div className="sm:px-56 flex flex-wrap justify-between items-center space-y-6">
-          {results?.entries?.map(({ id, links, source, title }) => (
+          {results?.map(({ id, links, source, title }) => (
             <div key={id} className="md:w-2/5 w-full ">
               <a
                 href={links?.[0].href}
@@ -80,20 +80,18 @@ const Result = () => {
     case "/image":
       return (
         <div className="flex flex-wrap justify-center items-center">
-          {results?.image_results?.map(
-            ({ image, link: { href, title } }, index) => (
-              <a
-                href={href}
-                target="_blank"
-                key={index}
-                rel="noreferrer"
-                className="sm:p-3 p-5"
-              >
-                <img src={image?.src} alt={title} loading="lazy" />
-                <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
-              </a>
-            )
-          )}
+          {results?.map(({ image, link: { href, title } }, index) => (
+            <a
+              href={href}
+              target="_blank"
+              key={index}
+              rel="noreferrer"
+              className="sm:p-3 p-5"
+            >
+              <img src={image?.src} alt={title} loading="lazy" />
+              <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
+            </a>
+          ))}
         </div>
       );
       break;

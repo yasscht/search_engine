@@ -3,16 +3,23 @@ import ReactPlayer from "react-player";
 import { useLocation } from "react-router-dom";
 import { useResultContext } from "../context/ResultContextProvider";
 
-import Loading from "./Loading";
+import { Loading } from "./Loading";
 
 const Result = () => {
   const { results, isLoading, getResults, searchTerm } = useResultContext();
-  useEffect(() => {
-    getResults("/search/q=facebook&num=40");
-  }, []);
   const location = useLocation();
+  useEffect(() => {
+    if (searchTerm) {
+      if (location.pathname === "/videos") {
+        getResults(`/search/q=${searchTerm}&num=40 videos`);
+      } else {
+        getResults(`${location.pathname}/q=${searchTerm}&num=40`);
+      }
+    }
+  }, [searchTerm, location.pathname]);
+
   console.log(results);
-  if (isLoading) return <Loading />;
+
   switch (location.pathname) {
     case "/search":
       return (
@@ -26,7 +33,7 @@ const Result = () => {
                 <p className="text-lg hover:underline dark:text-blue-300 text-blue-700  ">
                   {title}
                 </p>
-                <p className="text-lg hover:underline dark:text-white-300 text-black-700  ">
+                <p className="text-lg  dark:text-white-300 text-black-700  ">
                   {description}
                 </p>
               </a>
@@ -41,8 +48,25 @@ const Result = () => {
     case "/videos":
       return "videos";
       break;
-    case "/images":
-      return "images";
+    case "/image":
+      return (
+        <div className="flex flex-wrap justify-center items-center">
+          {results?.image_results?.map(
+            ({ image, link: { href, title } }, index) => (
+              <a
+                href={href}
+                target="_blank"
+                key={index}
+                rel="noreferrer"
+                className="sm:p-3 p-5"
+              >
+                <img src={image?.src} alt={title} loading="lazy" />
+                <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
+              </a>
+            )
+          )}
+        </div>
+      );
       break;
 
     default:
